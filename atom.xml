@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Charon之家</title>
+  <title>Charon的小屋</title>
   
   
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-09-28T07:29:02.908Z</updated>
+  <updated>2017-10-02T12:22:52.117Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,21 +17,48 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Fragment详解</title>
+    <link href="http://yoursite.com/2017/10/02/Fragment%E8%AF%A6%E8%A7%A3/"/>
+    <id>http://yoursite.com/2017/10/02/Fragment详解/</id>
+    <published>2017-10-02T12:21:24.000Z</published>
+    <updated>2017-10-02T12:22:52.117Z</updated>
+    
+    <content type="html"><![CDATA[<p>一般手机开发，用到fragment的情况很多，主要有以下两种用法</p><blockquote><ol><li>平板与手机的运用</li><li>抽出相应模块复用</li></ol></blockquote><h1 id="一、Fragment的使用"><a href="#一、Fragment的使用" class="headerlink" title="一、Fragment的使用"></a>一、Fragment的使用</h1><h2 id="（一）静态使用"><a href="#（一）静态使用" class="headerlink" title="（一）静态使用"></a>（一）静态使用</h2><h3 id="1-大致流程"><a href="#1-大致流程" class="headerlink" title="1.大致流程"></a>1.大致流程</h3><ol><li>继承fragment（app包下的），重写onCreateView()回调方法 设置Fragment的布局</li><li>在Activity中声明Fragment 使用方式与view相同</li></ol><a id="more"></a><p>###2.创建和使用的步骤</p><ol><li>创建子类继承fragment</li><li>重写onCreateView()方法，该方法主要定义fragment的布局，以view对象的形式返回fragment的视图</li><li>将fragment引入到Activity中</li></ol><p>###3.要点</p><ol><li>LayoutInflater 布局填充器或者加载器， 将xml文件转换成view对象<br>方法：inflate(表示加载的xml文件资源，是否加入根布局)</li><li>直接在xml（activity的xml）中用fragment标签，用name指定自定义的fragment（类名）</li></ol><h2 id="（二）动态使用后"><a href="#（二）动态使用后" class="headerlink" title="（二）动态使用后"></a>（二）动态使用后</h2><h3 id="1-大致流程-1"><a href="#1-大致流程-1" class="headerlink" title="1.大致流程"></a>1.大致流程</h3><ol><li>继承fragment（app包下的），重写onCreateView()回调方法 设置Fragment的布局</li><li>在Activity中创建Fragment的管理器对象</li><li>获取Fragment的事务对象并开启</li><li>调用事务的动态方法，动态地添加、删除、替换fragment</li><li>提交事务</li></ol><p>###2.创建和使用的步骤</p><ol><li>创建子类继承fragment</li><li>重写onCreateView()方法，该方法主要定义fragment的布局，以view对象的形式返回fragment的视图</li><li>在Activity中创建FragmentManager</li></ol><h3 id="3-要点"><a href="#3-要点" class="headerlink" title="3.要点"></a>3.要点</h3><ol><li>事务：是一组不可再分割的操作集合。如：10行代码为1个事务，如果第9行报错，则前8行代码也不执行。</li></ol><h3 id="4-代码"><a href="#4-代码" class="headerlink" title="4.代码"></a>4.代码</h3><pre><code>//在Activity中创建Fragment的管理器对象FragmentManager manager = getFragmentManager();//获取Fragment的事务对象并开启FragmentTransaction transaction = manager.beginTransaction();//调用事务的动态方法，动态地添加、删除、替换fragment//将TitleFragmnet动态添加到title_layout的位置（创建的为linearLayout这种布局）transaction.add(R.id.title_layout,new TitleFragmnet());//transaction.remove(arg0);  remove(需要移出的fragment对象);//transaction.replace(arg0,arg1)  replace(表示替换fragment位置的资源id,替换fragment对象)  //提交事务transaction.commit();</code></pre><h2 id="（三）v4包下的使用"><a href="#（三）v4包下的使用" class="headerlink" title="（三）v4包下的使用"></a>（三）v4包下的使用</h2><h3 id="1-大致流程-2"><a href="#1-大致流程-2" class="headerlink" title="1.大致流程"></a>1.大致流程</h3><ol><li>继承fragment（v4下的），重写onCreateView()回调方法 设置Fragment的布局</li><li>在Activity（继承FragmentActivity）中创建Fragment的管理器对象(v4下)</li><li>获取Fragment的事务对象(v4下)并开启</li><li>调用事务的动态方法，动态地添加、删除、替换fragment</li><li>提交事务</li></ol><p>###2.创建和使用的步骤</p><ol><li>创建子类继承fragment</li><li>重写onCreateView()方法，该方法主要定义fragment的布局，以view对象的形式返回fragment的视图</li><li>在Activity（继承FragmentActivity）中创建FragmentManager</li></ol><h3 id="3-要点-1"><a href="#3-要点-1" class="headerlink" title="3.要点"></a>3.要点</h3><ol><li>导包的统一性。</li></ol><h1 id="二、Fragment的生命周期"><a href="#二、Fragment的生命周期" class="headerlink" title="二、Fragment的生命周期"></a>二、Fragment的生命周期</h1><h2 id="（一）三个主要方法"><a href="#（一）三个主要方法" class="headerlink" title="（一）三个主要方法"></a>（一）三个主要方法</h2><blockquote><ol><li>onCreate（）创建Fragment时调用</li><li>onCreateView()  第一次绘制Fragment时调用，返回view对象</li><li>onPause()用户离开Fragment时调用</li></ol></blockquote><h2 id="（二）Activity的生命周期"><a href="#（二）Activity的生命周期" class="headerlink" title="（二）Activity的生命周期"></a>（二）Activity的生命周期</h2><blockquote><ol><li>onCreate() 创建时</li><li>onStart() 用户能看到时</li><li>onResume() 获取焦点时</li><li>onPause() 失去焦点时</li><li>onStop() 被完全遮挡</li><li>onRestart() 被重新打开</li><li>onDestroy() 直接返回</li></ol></blockquote><h2 id="（二）Fragment的生命周期"><a href="#（二）Fragment的生命周期" class="headerlink" title="（二）Fragment的生命周期"></a>（二）Fragment的生命周期</h2><blockquote><ol><li>onAttach() activity和fragment产生关联时回调的方法</li><li>onCreate() fragment第一次被创建</li><li>onCreateView() fragment第一次绘制界面</li><li>onActivityCreated() 当前fragment所属的activity创建成功</li><li>onStart() fragment能被用户看到时调用</li><li>onResume() fragment能够接受用户事件</li><li>onPause() 失去用户焦点</li><li>onStop() fragment完全被遮挡</li><li>onDestroyView() activity中的fragment被移除</li><li>onDestroy() fragment被销毁</li><li>onDetach() activity和fragment失去关联时回调的方法</li></ol></blockquote><h2 id="（三）生命周期流程"><a href="#（三）生命周期流程" class="headerlink" title="（三）生命周期流程"></a>（三）生命周期流程</h2><h3 id="1-第一次打开"><a href="#1-第一次打开" class="headerlink" title="1. 第一次打开"></a>1. 第一次打开</h3><p>Activity  onCreate()</p><p>Fragment onAttach()  onCreate()  onCreateView() onActivityCreated()</p><p>Activity  onStart()</p><p>Fragment  onStart()</p><p>Activity  onResume()</p><p>Fragment  onResume()</p><h3 id="2-屏幕熄灭"><a href="#2-屏幕熄灭" class="headerlink" title="2. 屏幕熄灭"></a>2. 屏幕熄灭</h3><p>Fragment  onPause()</p><p>Activity  onPause()</p><p>Fragment  onStop()</p><p>Activity  onStop()</p><h3 id="3-fragment切换消失"><a href="#3-fragment切换消失" class="headerlink" title="3. fragment切换消失"></a>3. fragment切换消失</h3><p>Fragment1 onPause() onStop() onDestroyView() onDestroy() onDetach()</p><h3 id="4-fragment切换重现"><a href="#4-fragment切换重现" class="headerlink" title="4. fragment切换重现"></a>4. fragment切换重现</h3><p>Fragment1 onAttach()  onCreate()  onCreateView() onActivityCreated() onStart() onResume()</p><h3 id="5-后台打开"><a href="#5-后台打开" class="headerlink" title="5. 后台打开"></a>5. 后台打开</h3><p>Activity onRestart() onStart()</p><p>Fragment onStart()</p><p>Activity onResume()</p><p>Fragment onStart()</p><h3 id="6-关闭"><a href="#6-关闭" class="headerlink" title="6. 关闭"></a>6. 关闭</h3><p>Fragment onPause()</p><p>Activity onPause()</p><p>Fragment onStop()</p><p>Activity onStop()</p><p>Fragment onDestroyView() onDestroy() onDetach()</p><p>Activity onDestroy()</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;一般手机开发，用到fragment的情况很多，主要有以下两种用法&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;平板与手机的运用&lt;/li&gt;
+&lt;li&gt;抽出相应模块复用&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&quot;一、Fragment的使用&quot;&gt;&lt;a href=&quot;#一、Fragment的使用&quot; class=&quot;headerlink&quot; title=&quot;一、Fragment的使用&quot;&gt;&lt;/a&gt;一、Fragment的使用&lt;/h1&gt;&lt;h2 id=&quot;（一）静态使用&quot;&gt;&lt;a href=&quot;#（一）静态使用&quot; class=&quot;headerlink&quot; title=&quot;（一）静态使用&quot;&gt;&lt;/a&gt;（一）静态使用&lt;/h2&gt;&lt;h3 id=&quot;1-大致流程&quot;&gt;&lt;a href=&quot;#1-大致流程&quot; class=&quot;headerlink&quot; title=&quot;1.大致流程&quot;&gt;&lt;/a&gt;1.大致流程&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;继承fragment（app包下的），重写onCreateView()回调方法 设置Fragment的布局&lt;/li&gt;
+&lt;li&gt;在Activity中声明Fragment 使用方式与view相同&lt;/li&gt;
+&lt;/ol&gt;
+    
+    </summary>
+    
+    
+      <category term="Android" scheme="http://yoursite.com/tags/Android/"/>
+    
+  </entry>
+  
+  <entry>
     <title>mkdir()与mkdirs()的区别</title>
     <link href="http://yoursite.com/2017/09/28/mkdir()%E4%B8%8Emkdirs()%E7%9A%84%E5%8C%BA%E5%88%AB/"/>
     <id>http://yoursite.com/2017/09/28/mkdir()与mkdirs()的区别/</id>
     <published>2017-09-28T07:28:03.000Z</published>
-    <updated>2017-09-28T07:29:02.908Z</updated>
+    <updated>2017-09-28T07:39:58.987Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>用了file.mkdir()为何还是不能创建文件？</p><h1 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h1><p> boolean mkdir() :  创建此抽象路径名指定的目录。<br> boolean mkdirs() :  创建此抽象路径名指定的目录，包括创建必需但不存在的父目录。 </p><h1 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">File file = new Flie(&quot;d:/aaa&quot;);</div><div class="line">file.mkdir();</div></pre></td></tr></table></figure><p>能创建成功目录，会在d盘下创建名为aaa的目录。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">File file = new Flie(&quot;d:/bbb/ccc&quot;);</div><div class="line">file.mkdir();</div></pre></td></tr></table></figure><p>不能创建成功，因为d盘下没有名为bbb的目录。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">File file = new Flie(&quot;d:/bbb/ccc&quot;);</div><div class="line">file.mkdirs();</div></pre></td></tr></table></figure><p>可以创建成功，会在d盘下创建名为bbb的目录，然后在bbb下创建名为ccc的目录。</p>]]></content>
+    <content type="html"><![CDATA[<h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>用了file.mkdir()为何还是不能创建文件？</p><h1 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h1><p> boolean mkdir() :  创建此抽象路径名指定的目录。<br> boolean mkdirs() :  创建此抽象路径名指定的目录，包括创建必需但不存在的父目录。 </p><a id="more"></a><h1 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">File file = new Flie(&quot;d:/aaa&quot;);</div><div class="line">file.mkdir();</div></pre></td></tr></table></figure><p>能创建成功目录，会在d盘下创建名为aaa的目录。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">File file = new Flie(&quot;d:/bbb/ccc&quot;);</div><div class="line">file.mkdir();</div></pre></td></tr></table></figure><p>不能创建成功，因为d盘下没有名为bbb的目录。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">File file = new Flie(&quot;d:/bbb/ccc&quot;);</div><div class="line">file.mkdirs();</div></pre></td></tr></table></figure><p>可以创建成功，会在d盘下创建名为bbb的目录，然后在bbb下创建名为ccc的目录。</p>]]></content>
     
     <summary type="html">
     
-      
-      
-        &lt;h1 id=&quot;问题描述&quot;&gt;&lt;a href=&quot;#问题描述&quot; class=&quot;headerlink&quot; title=&quot;问题描述&quot;&gt;&lt;/a&gt;问题描述&lt;/h1&gt;&lt;p&gt;用了file.mkdir()为何还是不能创建文件？&lt;/p&gt;
-&lt;h1 id=&quot;比较&quot;&gt;&lt;a href=&quot;#比较&quot; class=
-      
+      &lt;h1 id=&quot;问题描述&quot;&gt;&lt;a href=&quot;#问题描述&quot; class=&quot;headerlink&quot; title=&quot;问题描述&quot;&gt;&lt;/a&gt;问题描述&lt;/h1&gt;&lt;p&gt;用了file.mkdir()为何还是不能创建文件？&lt;/p&gt;
+&lt;h1 id=&quot;比较&quot;&gt;&lt;a href=&quot;#比较&quot; class=&quot;headerlink&quot; title=&quot;比较&quot;&gt;&lt;/a&gt;比较&lt;/h1&gt;&lt;p&gt; boolean mkdir() :  创建此抽象路径名指定的目录。&lt;br&gt; boolean mkdirs() :  创建此抽象路径名指定的目录，包括创建必需但不存在的父目录。 &lt;/p&gt;
     
     </summary>
     
