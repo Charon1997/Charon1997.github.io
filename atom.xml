@@ -72,7 +72,7 @@
     <link href="http://yoursite.com/2017/09/28/mkdir()%E4%B8%8Emkdirs()%E7%9A%84%E5%8C%BA%E5%88%AB/"/>
     <id>http://yoursite.com/2017/09/28/mkdir()与mkdirs()的区别/</id>
     <published>2017-09-28T07:28:03.000Z</published>
-    <updated>2017-09-28T07:39:58.987Z</updated>
+    <updated>2017-10-03T07:24:49.231Z</updated>
     
     <content type="html"><![CDATA[<h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>用了file.mkdir()为何还是不能创建文件？</p><h1 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h1><p> boolean mkdir() :  创建此抽象路径名指定的目录。<br> boolean mkdirs() :  创建此抽象路径名指定的目录，包括创建必需但不存在的父目录。 </p><a id="more"></a><h1 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">File file = new Flie(&quot;d:/aaa&quot;);</div><div class="line">file.mkdir();</div></pre></td></tr></table></figure><p>能创建成功目录，会在d盘下创建名为aaa的目录。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">File file = new Flie(&quot;d:/bbb/ccc&quot;);</div><div class="line">file.mkdir();</div></pre></td></tr></table></figure><p>不能创建成功，因为d盘下没有名为bbb的目录。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">File file = new Flie(&quot;d:/bbb/ccc&quot;);</div><div class="line">file.mkdirs();</div></pre></td></tr></table></figure><p>可以创建成功，会在d盘下创建名为bbb的目录，然后在bbb下创建名为ccc的目录。</p>]]></content>
     
@@ -83,6 +83,8 @@
     
     </summary>
     
+    
+      <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
     
   </entry>
   
