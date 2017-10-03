@@ -53,7 +53,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Android," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -71,18 +71,17 @@
 
 
 
-<meta name="description" content="一般手机开发，用到fragment的情况很多，主要有以下两种用法   平板与手机的运用 抽出相应模块复用   一、Fragment的使用（一）静态使用1.大致流程 继承fragment（app包下的），重写onCreateView()回调方法 设置Fragment的布局 在Activity中声明Fragment 使用方式与view相同">
-<meta name="keywords" content="Android">
+<meta name="description" content="一般手机开发，用到fragment的情况很多，主要有以下两种用法   平板与手机的运用 抽出相应模块复用   一、Fragment的使用（一）静态使用1.大致流程 继承fragment（app包下的），重写onCreateView()回调方法 设置Fragment的布局 在Activity中声明Fragment 使用方式与view相同  ###2.创建和使用的步骤  创建子类继承fragment">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Fragment详解">
+<meta property="og:title" content="Charon的小屋">
 <meta property="og:url" content="http://yoursite.com/2017/10/02/Fragment详解/index.html">
 <meta property="og:site_name" content="Charon的小屋">
-<meta property="og:description" content="一般手机开发，用到fragment的情况很多，主要有以下两种用法   平板与手机的运用 抽出相应模块复用   一、Fragment的使用（一）静态使用1.大致流程 继承fragment（app包下的），重写onCreateView()回调方法 设置Fragment的布局 在Activity中声明Fragment 使用方式与view相同">
+<meta property="og:description" content="一般手机开发，用到fragment的情况很多，主要有以下两种用法   平板与手机的运用 抽出相应模块复用   一、Fragment的使用（一）静态使用1.大致流程 继承fragment（app包下的），重写onCreateView()回调方法 设置Fragment的布局 在Activity中声明Fragment 使用方式与view相同  ###2.创建和使用的步骤  创建子类继承fragment">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-10-02T12:22:52.117Z">
+<meta property="og:updated_time" content="2017-10-02T12:27:38.398Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Fragment详解">
-<meta name="twitter:description" content="一般手机开发，用到fragment的情况很多，主要有以下两种用法   平板与手机的运用 抽出相应模块复用   一、Fragment的使用（一）静态使用1.大致流程 继承fragment（app包下的），重写onCreateView()回调方法 设置Fragment的布局 在Activity中声明Fragment 使用方式与view相同">
+<meta name="twitter:title" content="Charon的小屋">
+<meta name="twitter:description" content="一般手机开发，用到fragment的情况很多，主要有以下两种用法   平板与手机的运用 抽出相应模块复用   一、Fragment的使用（一）静态使用1.大致流程 继承fragment（app包下的），重写onCreateView()回调方法 设置Fragment的布局 在Activity中声明Fragment 使用方式与view相同  ###2.创建和使用的步骤  创建子类继承fragment">
 
 
 
@@ -118,7 +117,7 @@
 
 
 
-  <title>Fragment详解 | Charon的小屋</title>
+  <title> | Charon的小屋</title>
   
 
 
@@ -253,7 +252,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Fragment详解</h1>
+          <h1 class="post-title" itemprop="name headline"></h1>
         
 
         <div class="post-meta">
@@ -314,7 +313,6 @@
 <li>继承fragment（app包下的），重写onCreateView()回调方法 设置Fragment的布局</li>
 <li>在Activity中声明Fragment 使用方式与view相同</li>
 </ol>
-<a id="more"></a>
 <p>###2.创建和使用的步骤</p>
 <ol>
 <li>创建子类继承fragment</li>
@@ -342,22 +340,8 @@
 <h3 id="3-要点"><a href="#3-要点" class="headerlink" title="3.要点"></a>3.要点</h3><ol>
 <li>事务：是一组不可再分割的操作集合。如：10行代码为1个事务，如果第9行报错，则前8行代码也不执行。</li>
 </ol>
-<h3 id="4-代码"><a href="#4-代码" class="headerlink" title="4.代码"></a>4.代码</h3><pre><code>//在Activity中创建Fragment的管理器对象
-FragmentManager manager = getFragmentManager();
-
-//获取Fragment的事务对象并开启
-FragmentTransaction transaction = manager.beginTransaction();
-
-//调用事务的动态方法，动态地添加、删除、替换fragment
-//将TitleFragmnet动态添加到title_layout的位置（创建的为linearLayout这种布局）
-transaction.add(R.id.title_layout,new TitleFragmnet());
-
-//transaction.remove(arg0);  remove(需要移出的fragment对象);
-//transaction.replace(arg0,arg1)  replace(表示替换fragment位置的资源id,替换fragment对象)  
-
-//提交事务
-transaction.commit();
-</code></pre><h2 id="（三）v4包下的使用"><a href="#（三）v4包下的使用" class="headerlink" title="（三）v4包下的使用"></a>（三）v4包下的使用</h2><h3 id="1-大致流程-2"><a href="#1-大致流程-2" class="headerlink" title="1.大致流程"></a>1.大致流程</h3><ol>
+<h3 id="4-代码"><a href="#4-代码" class="headerlink" title="4.代码"></a>4.代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">//在Activity中创建Fragment的管理器对象</div><div class="line">FragmentManager manager = getFragmentManager();</div><div class="line">    </div><div class="line">//获取Fragment的事务对象并开启</div><div class="line">FragmentTransaction transaction = manager.beginTransaction();</div><div class="line">	</div><div class="line">//调用事务的动态方法，动态地添加、删除、替换fragment</div><div class="line">//将TitleFragmnet动态添加到title_layout的位置（创建的为linearLayout这种布局）</div><div class="line">transaction.add(R.id.title_layout,new TitleFragmnet());</div><div class="line"></div><div class="line">//transaction.remove(arg0);  remove(需要移出的fragment对象);</div><div class="line">//transaction.replace(arg0,arg1)  replace(表示替换fragment位置的资源id,替换fragment对象)  </div><div class="line">	</div><div class="line">//提交事务</div><div class="line">transaction.commit();</div></pre></td></tr></table></figure>
+<h2 id="（三）v4包下的使用"><a href="#（三）v4包下的使用" class="headerlink" title="（三）v4包下的使用"></a>（三）v4包下的使用</h2><h3 id="1-大致流程-2"><a href="#1-大致流程-2" class="headerlink" title="1.大致流程"></a>1.大致流程</h3><ol>
 <li>继承fragment（v4下的），重写onCreateView()回调方法 设置Fragment的布局</li>
 <li>在Activity（继承FragmentActivity）中创建Fragment的管理器对象(v4下)</li>
 <li>获取Fragment的事务对象(v4下)并开启</li>
@@ -453,12 +437,6 @@ transaction.commit();
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/Android/" rel="tag"># Android</a>
-          
-        </div>
-      
 
       
       
@@ -477,6 +455,10 @@ transaction.commit();
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/10/03/Android-创建UI模板和自定义控件/" rel="prev" title="Android 创建UI模板和自定义控件">
+                Android 创建UI模板和自定义控件 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -556,7 +538,7 @@ transaction.commit();
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
