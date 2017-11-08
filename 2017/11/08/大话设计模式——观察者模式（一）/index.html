@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="设计模式," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Charon的小屋" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="一、概念1.1  定义定义对象间的一种一对多的依赖关系。当一个对象（被观察者）的状态发生改变时，所有依赖于它的对象都得到通知并被自动更新（观察者）。">
+<meta name="keywords" content="设计模式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="大话设计模式——观察者模式（一）">
+<meta property="og:url" content="http://yoursite.com/2017/11/08/大话设计模式——观察者模式（一）/index.html">
+<meta property="og:site_name" content="Charon的小屋">
+<meta property="og:description" content="一、概念1.1  定义定义对象间的一种一对多的依赖关系。当一个对象（被观察者）的状态发生改变时，所有依赖于它的对象都得到通知并被自动更新（观察者）。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-11-08T05:52:54.181Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="大话设计模式——观察者模式（一）">
+<meta name="twitter:description" content="一、概念1.1  定义定义对象间的一种一对多的依赖关系。当一个对象（被观察者）的状态发生改变时，所有依赖于它的对象都得到通知并被自动更新（观察者）。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/11/08/大话设计模式——观察者模式（一）/"/>
+
+
+
+
+
+  <title>大话设计模式——观察者模式（一） | Charon的小屋</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+	<a href="https://github.com/you"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Charon的小屋</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/08/大话设计模式——观察者模式（一）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Charon">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Charon的小屋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">大话设计模式——观察者模式（一）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-08T13:44:18+08:00">
+                2017-11-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="一、概念"><a href="#一、概念" class="headerlink" title="一、概念"></a>一、概念</h2><h3 id="1-1-定义"><a href="#1-1-定义" class="headerlink" title="1.1  定义"></a>1.1  定义</h3><p>定义对象间的一种一对多的依赖关系。当一个对象（被观察者）的状态发生改变时，所有依赖于它的对象都得到通知并被自动更新（观察者）。<br><a id="more"></a></p>
+<h3 id="1-2-实例场景"><a href="#1-2-实例场景" class="headerlink" title="1.2 实例场景"></a>1.2 实例场景</h3><p>小陈在气象局工作，可以为他的家人提供最新的天气情况。这时，小陈就是被观察者，他的家人就是观察者。他的家人订阅天气服务，小陈就可以提供最新的天气预报到订阅者手中。而他的家人收到通知后，可以做出自己的反应。</p>
+<p>##二、通用代码</p>
+<h3 id="2-1-目标类"><a href="#2-1-目标类" class="headerlink" title="2.1 目标类"></a>2.1 目标类</h3><p>这里的目标类对应着实例里的小陈，他知道观察自己的观察者（家人），并提供了注册和删除观察者的接口。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">public class Subject &#123;</div><div class="line">	private ArrayList&lt;Observer&gt; observers = new ArrayList&lt;Observer&gt;();</div><div class="line">	/**</div><div class="line">	 * 添加</div><div class="line">	 * @param observer 观察者</div><div class="line">	 */</div><div class="line">	public void attach(Observer observer) &#123;</div><div class="line">		observers.add(observer);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	/**</div><div class="line">	 * 删除</div><div class="line">	 * @param observer 观察者</div><div class="line">	 */</div><div class="line">	public void detach(Observer observer) &#123;</div><div class="line">		observers.remove(observer);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	/**</div><div class="line">	 * 向所有注册的观察者发送信息</div><div class="line">	 */</div><div class="line">	protected void notifyObservers()&#123;</div><div class="line">		for(Observer observer:observers)&#123;</div><div class="line">			observer.update(this);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="2-2-具体目标类"><a href="#2-2-具体目标类" class="headerlink" title="2.2 具体目标类"></a>2.2 具体目标类</h3><p>这个类就相当于是天气预报的功能，负责把有关的状态存入到相应的观察者对象中。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">public class ConcreatSubject extends Subject &#123;</div><div class="line">	private String subjectState;</div><div class="line"></div><div class="line">	public String getSubjectState() &#123;</div><div class="line">		return subjectState;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	public void setSubjectState(String subjectState) &#123;</div><div class="line">		this.subjectState = subjectState;</div><div class="line">		this.notifyObservers();</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="2-3-观察者接口"><a href="#2-3-观察者接口" class="headerlink" title="2.3 观察者接口"></a>2.3 观察者接口</h3><p>此类为观察者的接口，提供了一个更新的接口，当目标发生改变时，通知相应的观察者<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">public interface Observer &#123;</div><div class="line">	/**</div><div class="line">	 * 更新的接口</div><div class="line">	 * @param subject subject 传入目标对象，方便获取目标的状态</div><div class="line">	 */</div><div class="line">	void update(Subject subject);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="2-4-具体的观察者对象"><a href="#2-4-具体的观察者对象" class="headerlink" title="2.4 具体的观察者对象"></a>2.4 具体的观察者对象</h3><p>这个类就相当于实例的小陈的家人，他的家人知道天气变化了之后，会采取不同的策略去改变一些事。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">public class ConcreatObserver implements Observer &#123;</div><div class="line">	//观察者状态</div><div class="line">	private String observerState;</div><div class="line">	</div><div class="line">	/**</div><div class="line">	 * 获取目标类的状态，同步到观察者中</div><div class="line">	 */</div><div class="line">	@Override</div><div class="line">	public void update(Subject subject) &#123;</div><div class="line">		observerState = ((ConcreatSubject)subject).getSubjectState();</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="2-5-总结"><a href="#2-5-总结" class="headerlink" title="2.5 总结"></a>2.5 总结</h3><p>这样，我们就可以通过改变ConcreatSubject里的状态值，通过循环来通知每一个注册了的观察者，让他们也做出相应的改变。</p>
+<h2 id="三、详细设计"><a href="#三、详细设计" class="headerlink" title="三、详细设计"></a>三、详细设计</h2><h3 id="3-1-天气目标类"><a href="#3-1-天气目标类" class="headerlink" title="3.1 天气目标类"></a>3.1 天气目标类</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">public class WeatherSubject &#123;</div><div class="line">	//用来保存注册的观察者对象</div><div class="line">	private ArrayList&lt;Observer&gt; observers = new ArrayList&lt;Observer&gt;();</div><div class="line">	/**</div><div class="line">	 * 把订阅天气的人添加到订阅者列表中</div><div class="line">	 * @param observer 观察者</div><div class="line">	 */</div><div class="line">	public void attach(Observer observer) &#123;</div><div class="line">		observers.add(observer);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	/**</div><div class="line">	 * 删除订阅天气的人</div><div class="line">	 * @param observer 观察者</div><div class="line">	 */</div><div class="line">	public void detach(Observer observer) &#123;</div><div class="line">		observers.remove(observer);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	/**</div><div class="line">	 * 通知所有已经订阅了天气的人</div><div class="line">	 */</div><div class="line">	protected void notifyObservers()&#123;</div><div class="line">		for(Observer observer:observers)&#123;</div><div class="line">			observer.update(this);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="3-2-具体天气目标类"><a href="#3-2-具体天气目标类" class="headerlink" title="3.2 具体天气目标类"></a>3.2 具体天气目标类</h3><p>相当于天气预报，能更改天气信息，并通知他的家人（被观察者）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">public class ConcreatWeatherSubject extends WeatherSubject &#123;</div><div class="line">	private String weatherContent;</div><div class="line"></div><div class="line">	public String getWeatherContent() &#123;</div><div class="line">		return weatherContent;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	public void setWeatherContent(String weatherContent) &#123;</div><div class="line">		this.weatherContent = weatherContent;</div><div class="line">		//天气更新，通知所有订阅天气的观察者</div><div class="line">		this.notifyObservers();</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="3-3-观察者类"><a href="#3-3-观察者类" class="headerlink" title="3.3 观察者类"></a>3.3 观察者类</h3><p>相当于他的家人，我们细化了一些细节的信息，如名字，行为等。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line">public class ConcreatObserver implements Observer &#123;</div><div class="line">	//观察者名称</div><div class="line">	private String observerName;</div><div class="line">	</div><div class="line">	//天气情况</div><div class="line">	private String weatherContent;</div><div class="line">	</div><div class="line">	//提醒内容</div><div class="line">	private String remindThing;</div><div class="line">	</div><div class="line">	public String getObserverName() &#123;</div><div class="line">		return observerName;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	public void setObserverName(String observerName) &#123;</div><div class="line">		this.observerName = observerName;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	public String getWeatherContent() &#123;</div><div class="line">		return weatherContent;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	public void setWeatherContent(String weatherContent) &#123;</div><div class="line">		this.weatherContent = weatherContent;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	public String getRemindThing() &#123;</div><div class="line">		return remindThing;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	public void setRemindThing(String remindThing) &#123;</div><div class="line">		this.remindThing = remindThing;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	/**</div><div class="line">	 * 获取目标类的状态，同步到观察者中</div><div class="line">	 */</div><div class="line">	@Override</div><div class="line">	public void update(WeatherSubject subject) &#123;</div><div class="line">		weatherContent = ((ConcreatWeatherSubject)subject).getWeatherContent();</div><div class="line">		System.out.println(observerName+&quot;收到了&quot;+weatherContent+&quot;,&quot;+remindThing);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这里还可以根据天气情况，判断进行不同的事情。</p>
+<h3 id="3-4-测试类"><a href="#3-4-测试类" class="headerlink" title="3.4 测试类"></a>3.4 测试类</h3><p>对观察者模式的代码进行一个测试。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">public class Client &#123;</div><div class="line"></div><div class="line">	public static void main(String[] args) &#123;</div><div class="line">		//1. 创建一个目标</div><div class="line">		ConcreatWeatherSubject weatherSubject = new ConcreatWeatherSubject();</div><div class="line">		//2. 创建一个观察者</div><div class="line">		ConcreatObserver observerGf = new ConcreatObserver();</div><div class="line">		observerGf.setObserverName(&quot;女票&quot;);</div><div class="line">		observerGf.setRemindThing(&quot;是我们的第一次约会，地点公园&quot;);</div><div class="line">		</div><div class="line">		ConcreatObserver observerMom = new ConcreatObserver();</div><div class="line">		observerMom.setObserverName(&quot;老妈&quot;);</div><div class="line">		observerMom.setRemindThing(&quot;去逛街了&quot;);</div><div class="line">		//3. 注册观察者</div><div class="line">		weatherSubject.attach(observerGf);</div><div class="line">		weatherSubject.attach(observerMom);</div><div class="line">		//4. 目标发布天气</div><div class="line">		weatherSubject.setWeatherContent(&quot;大暴雨&quot;);</div><div class="line"></div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这时，我们会得到以下的输出。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">女票收到了大暴雨,是我们的第一次约会，地点公园</div><div class="line">老妈收到了大暴雨,去逛街了</div></pre></td></tr></table></figure></p>
+<h3 id="3-5总结"><a href="#3-5总结" class="headerlink" title="3.5总结"></a>3.5总结</h3><p>让我们回顾一下整个流程。<br>首先，我们有我们的主角（目标，被观察者）小陈，和两个他的家人（观察者）。两个家人都去订阅了天气预报的服务。当天气改变时，我们的小陈会依次通知所有的订阅者，订阅者收到通知后，可以自行判断该怎么做。这就是观察者模式。</p>
+
+      
+    </div>
+    
+    
+    
+	
+	<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+  
+</div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/设计模式/" rel="tag"># 设计模式</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/10/30/Thread与Runnable的比较/" rel="next" title="Thread与Runnable的比较">
+                <i class="fa fa-chevron-left"></i> Thread与Runnable的比较
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/08/大话设计模式——观察者模式（二）/" rel="prev" title="大话设计模式——观察者模式（二）">
+                大话设计模式——观察者模式（二） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          
+            <img class="site-author-image" itemprop="image"
+              src="/images/avatar.jpg"
+              alt="Charon" />
+          
+            <p class="site-author-name" itemprop="name">Charon</p>
+            <p class="site-description motion-element" itemprop="description">一个今天胜过两个明天</p>
+        </div>
+
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+            
+              <a href="/archives/">
+            
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/Charon1997" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>GitHub</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:670544040@qq.com" target="_blank" title="E-Mail">
+                  
+                    <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://weibo.com/u/1966013455" target="_blank" title="WeiBo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>WeiBo</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://my.csdn.net/charon1997" target="_blank" title="CSDN">
+                  
+                    <i class="fa fa-fw fa-taxi"></i>CSDN</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/users/9d6dce5c10a3/timeline" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-rocket"></i>简书</a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、概念"><span class="nav-number">1.</span> <span class="nav-text">一、概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-定义"><span class="nav-number">1.1.</span> <span class="nav-text">1.1  定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-实例场景"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 实例场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-目标类"><span class="nav-number">1.3.</span> <span class="nav-text">2.1 目标类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-具体目标类"><span class="nav-number">1.4.</span> <span class="nav-text">2.2 具体目标类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-观察者接口"><span class="nav-number">1.5.</span> <span class="nav-text">2.3 观察者接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-具体的观察者对象"><span class="nav-number">1.6.</span> <span class="nav-text">2.4 具体的观察者对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-总结"><span class="nav-number">1.7.</span> <span class="nav-text">2.5 总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、详细设计"><span class="nav-number">2.</span> <span class="nav-text">三、详细设计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-天气目标类"><span class="nav-number">2.1.</span> <span class="nav-text">3.1 天气目标类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-具体天气目标类"><span class="nav-number">2.2.</span> <span class="nav-text">3.2 具体天气目标类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-观察者类"><span class="nav-number">2.3.</span> <span class="nav-text">3.3 观察者类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-测试类"><span class="nav-number">2.4.</span> <span class="nav-text">3.4 测试类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5总结"><span class="nav-number">2.5.</span> <span class="nav-text">3.5总结</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Charon</span>
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
