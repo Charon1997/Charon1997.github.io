@@ -71,18 +71,18 @@
 
 
 
-<meta name="description" content="##前言在Android开发过程中，我们可能会经常去自定义View，在自定义View之前，我们必须了解清楚系统是如何绘制出这些View的。 ##一、测量首先，我们的系统会先测量这个View的大小，以便知道该画多大的一个View。这个过程在onMeasure()方法中进行。首先我们需要了解这样一个强大的类——MeasureSpec，它来帮助我们测量View。MeasureSpec是一个32位的int">
+<meta name="description" content="##前言在Android开发过程中，我们可能会经常去自定义View，在自定义View之前，我们必须了解清楚系统是如何绘制出这些View的。">
 <meta name="keywords" content="设计模式">
 <meta property="og:type" content="article">
 <meta property="og:title" content="自定义View的测量与绘制">
 <meta property="og:url" content="http://yoursite.com/2018/03/13/自定义View的测量与绘制/index.html">
 <meta property="og:site_name" content="Charon的小屋">
-<meta property="og:description" content="##前言在Android开发过程中，我们可能会经常去自定义View，在自定义View之前，我们必须了解清楚系统是如何绘制出这些View的。 ##一、测量首先，我们的系统会先测量这个View的大小，以便知道该画多大的一个View。这个过程在onMeasure()方法中进行。首先我们需要了解这样一个强大的类——MeasureSpec，它来帮助我们测量View。MeasureSpec是一个32位的int">
+<meta property="og:description" content="##前言在Android开发过程中，我们可能会经常去自定义View，在自定义View之前，我们必须了解清楚系统是如何绘制出这些View的。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-13T08:50:39.157Z">
+<meta property="og:updated_time" content="2018-03-13T11:15:06.024Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="自定义View的测量与绘制">
-<meta name="twitter:description" content="##前言在Android开发过程中，我们可能会经常去自定义View，在自定义View之前，我们必须了解清楚系统是如何绘制出这些View的。 ##一、测量首先，我们的系统会先测量这个View的大小，以便知道该画多大的一个View。这个过程在onMeasure()方法中进行。首先我们需要了解这样一个强大的类——MeasureSpec，它来帮助我们测量View。MeasureSpec是一个32位的int">
+<meta name="twitter:description" content="##前言在Android开发过程中，我们可能会经常去自定义View，在自定义View之前，我们必须了解清楚系统是如何绘制出这些View的。">
 
 
 
@@ -303,7 +303,7 @@
       
 
       
-        <p>##前言<br>在Android开发过程中，我们可能会经常去自定义View，在自定义View之前，我们必须了解清楚系统是如何绘制出这些View的。</p>
+        <p>##前言<br>在Android开发过程中，我们可能会经常去自定义View，在自定义View之前，我们必须了解清楚系统是如何绘制出这些View的。<br><a id="more"></a></p>
 <p>##一、测量<br>首先，我们的系统会先测量这个View的大小，以便知道该画多大的一个View。这个过程在onMeasure()方法中进行。<br>首先我们需要了解这样一个强大的类——MeasureSpec，它来帮助我们测量View。<br>MeasureSpec是一个32位的int值，高2位为测量的模式，低30位为测量的大小。</p>
 <p>###1.1三种测量模式<br>EXACTLY<br>精确值模式，为我们控件的layout_width或者layout_height属性指定具体的数值，或者指定位match_parent时，用此模式。</p>
 <p>AT_MOST<br>最大值模式，为我们控件的layout_width或者layout_height属性指定为warp_content时，控件大小随着子控件或者内容的变化而变化，只要不超过父控件允许的最大尺寸即可。</p>
@@ -363,6 +363,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/13/Android   蓝牙BLE开发详解/" rel="prev" title="Android   蓝牙BLE开发详解">
+                Android   蓝牙BLE开发详解 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -433,7 +437,7 @@
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -446,7 +450,7 @@
             
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
